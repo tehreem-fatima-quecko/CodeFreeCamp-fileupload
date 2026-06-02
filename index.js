@@ -3,12 +3,6 @@ var app = express();
 var cors = require('cors');
 require('dotenv').config()
 
-const multer = require("multer");
-
-const upload = multer({
-  storage: multer.memoryStorage()
-});
-
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
@@ -20,6 +14,9 @@ app.use('/public', express.static(process.cwd() + '/public'));
 app.get('/', function (req, res) {
   res.sendFile(process.cwd() + '/views/index.html');
 });
+
+const multer = require("multer");
+const upload = multer({ storage: multer.memoryStorage() });
 
 app.post("/api/fileanalyse", upload.single("upfile"), (req, res) => {
   if (!req.file) {
