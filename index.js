@@ -4,7 +4,10 @@ var cors = require('cors');
 require('dotenv').config()
 
 const multer = require("multer");
-const upload = multer({ dest: "uploads/" });
+
+const upload = multer({
+  storage: multer.memoryStorage()
+});
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
